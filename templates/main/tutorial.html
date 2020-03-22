@@ -1,0 +1,24 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+
+
+<div class="row">
+<div class="col">
+<ul class="nav flex-column">
+<h5 class="text-info nav-link">Related Tutorials</h5>
+{% for tut in tutorials %}
+    
+<li class="nav-item">
+    <a class="nav-link active" href="/tutorial/{{tut.id}}">{{tut.tutorial_title}}</a>
+  </li>
+  
+{% endfor %}
+</ul>
+</div>
+
+<div class="container">
+<h1 class="text-info my-5">{{tutorial.tutorial_title}}</h1>
+<p>{{tutorial.tutorial_content |safe}}</p>
+</div>
+{% endblock  %}

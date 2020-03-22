@@ -1,0 +1,64 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+
+<div class="col-10">
+<div class="row">
+    <div class="col s12 m6">
+{% for tutorial in tutorials %}
+
+              <div class="card">
+          <div class="card-header text-info">
+            {{tutorial.tutorial_category}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{tutorial.tutorial_title}}</h5>
+            <p class="card-text">{{tutorial.tutorial_summary|safe}}</p>
+            <a href="/tutorial/{{tutorial.id}}" class="btn btn-primary">View More</a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<nav aria-label="Page navigation example">
+{% if tutorials.has_other_pages %}
+    <ul class="pagination">
+      {% if tutorials.has_previous %}
+      <li class="page-item">
+      <a href="?page={{tutorials.previous_page_number}}" class="page-link">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+      <a class="page-link">&laquo;</a>
+      </li>
+      {% endif %}
+      {% for i in tutorials.paginator.page_range %}
+        {% if tutorials.number == i %}
+        <li class="page-item active">
+        <a class="page-link">{{i}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+        <a href="?page={{i}}" class="page-link">{{i}}</a>
+        </li>
+        {% endif %}
+      {% endfor %}
+      {% if tutorials.has_next %}
+      <li class="page-item">
+      <a href="?page={{tutorials.next_page_number}}" class="page-link">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+      <a class="page-link">&raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+</nav>
+
+{% endblock  %}
